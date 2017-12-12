@@ -21,6 +21,11 @@ services:
     volumes:
       - 'rabbitmq_data:/bitnami'
 
+  catanie:
+    build: catanie
+
+  catamel:
+    build: catamel
 volumes:
   mongodb_data:
     driver: local
