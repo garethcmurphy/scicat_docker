@@ -1,17 +1,18 @@
 version: "3"
 services:
-  mongodb:
-    hostname: local-mongodb-mongodb.dev
-    image: 'bitnami/mongodb:latest'
+  local-mongodb-mongodb.dev:
+    #hostname: local-mongodb-mongodb.dev
+    #image: 'bitnami/mongodb:3.4.7-r0'
+    image: 'mongo'
     labels:
       kompose.service.type: nodeport
     ports:
       - "27017:27017"
     volumes:
-      - 'mongodb_data:/bitnami'
+      - './mongodb:/bitnami'
 
-  rabbitmq:
-    hostname: local-rabbit-rabbit.dev
+  local-rabbit-rabbitmq.dev:
+    hostname: local-rabbit-rabbitmq.dev
     image: 'bitnami/rabbitmq:latest'
     labels:
       kompose.service.type: nodeport
@@ -20,18 +21,46 @@ services:
       - '5672:5672'
       - '25672:25672'
       - '15672:15672'
+    environment:
+      - RABBITMQ_PASSWORD=admin
+      - RABBITMQ_USERNAME=admin
     volumes:
       - 'rabbitmq_data:/bitnami'
+    depends_on: 
+      - local-mongodb-mongodb.dev
 
   catanie:
     build: 
       context: catanie
       dockerfile: Dockerfile.catanie
     image: garethcmurphy/catanie
+    ports:
+      - '4200:4200'
+    depends_on: 
+      - local-rabbit-rabbitmq.dev
+      - local-mongodb-mongodb.dev
 
   catamel:
-    build: catamel
+    build: 
+      context: catamel
+      dockerfile: Dockerfile.catamel
     image: garethcmurphy/catamel
+    depends_on: 
+      - local-mongodb-mongodb.dev
+      - local-rabbit-rabbitmq.dev
+      - catanie
+      - myshell
+    links:
+      - local-mongodb-mongodb.dev
+ 
+  myshell:
+    build:
+      context: myshell
+    image: garethcmurphy/myshell
+    depends_on: 
+      - local-mongodb-mongodb.dev
+      - local-rabbit-rabbitmq.dev
+    
 
 volumes:
   mongodb_data:
