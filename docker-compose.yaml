@@ -22,10 +22,15 @@ services:
       - 'rabbitmq_data:/bitnami'
 
   catanie:
-    build: catanie
+    build: 
+      context: catanie
+      dockerfile: Dockerfile.catanie
+    image: garethcmurphy/catanie
 
   catamel:
     build: catamel
+    image: garethcmurphy/catamel
+
 volumes:
   mongodb_data:
     driver: local

@@ -1,0 +1,11 @@
+FROM nginx 
+
+RUN apt-get update && apt-get install -y git gnupg curl
+
+RUN curl -sL https://deb.nodesource.com/setup_9.x |  bash -
+RUN apt-get install -y nodejs
+ARG env=production
+# RUN ./node_modules/@angular/cli/bin/ng build --environment=dev -op /usr/share/nginx/html/dev
+COPY scripts/nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
