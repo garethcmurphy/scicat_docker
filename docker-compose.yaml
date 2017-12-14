@@ -1,9 +1,7 @@
 version: "3"
 services:
   local-mongodb-mongodb.dev:
-    #hostname: local-mongodb-mongodb.dev
-    #image: 'bitnami/mongodb:3.4.7-r0'
-    image: 'mongo'
+    image: 'bitnami/mongodb:latest'
     labels:
       kompose.service.type: nodeport
     ports:
@@ -46,7 +44,7 @@ services:
       dockerfile: Dockerfile.catamel
     image: garethcmurphy/catamel
     ports:
-      - '3000:3000'
+      - '3001:3000'
     depends_on: 
       - local-mongodb-mongodb.dev
       - local-rabbit-rabbitmq.dev
