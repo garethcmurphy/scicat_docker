@@ -25,7 +25,7 @@ services:
       - RABBITMQ_PASSWORD=admin
       - RABBITMQ_USERNAME=admin
     volumes:
-      - 'rabbitmq_data:/bitnami'
+      - './rabbitmq:/bitnami'
     depends_on: 
       - local-mongodb-mongodb.dev
 
@@ -35,7 +35,7 @@ services:
       dockerfile: Dockerfile.catanie
     image: garethcmurphy/catanie
     ports:
-      - '4200:4200'
+      - '4200:80'
     depends_on: 
       - local-rabbit-rabbitmq.dev
       - local-mongodb-mongodb.dev
@@ -45,6 +45,8 @@ services:
       context: catamel
       dockerfile: Dockerfile.catamel
     image: garethcmurphy/catamel
+    ports:
+      - '3000:3000'
     depends_on: 
       - local-mongodb-mongodb.dev
       - local-rabbit-rabbitmq.dev
