@@ -1,18 +1,23 @@
-FROM nginx 
+# gives a docker image below 200 MB
+FROM node
 
-RUN apt-get update && apt-get install -y git gnupg curl
-RUN curl -sL https://deb.nodesource.com/setup_9.x |  bash -
-RUN apt-get install -y nodejs
-ARG env=production
-RUN addgroup mygroup && adduser --disabled-password --ingroup mygroup myuser && mkdir -p /usr/src/app && chown -R myuser /usr/src/app
-USER myuser
-COPY package.json  /usr/src/app/
-WORKDIR  /usr/src/app/
+# create local user to avoid running as root
+# RUN addgroup angular && adduser -D -G angular catanie && mkdir -p /usr && chown -R catanie /usr
+
+# Prepare app directory
+WORKDIR /usr/src/app
+COPY package.json .
+
+# USER catanie
+# Install our packages
 RUN npm install
-# RUN npm install -g @angular/cli
-COPY . /usr/src/app/
-USER root
-RUN ./node_modules/@angular/cli/bin/ng build --environment=dev -op /usr/share/nginx/html/
-COPY scripts/nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80
+# Copy the rest of our application, node_modules is ignored via .dockerignore
+COPY . /usr/src/app
+
+EXPOSE 4200
+
+# Start the app
+#CMD HOST=`hostname -i` npm start
+CMD ./node_modules/@angular/cli/bin ng serve --host 0.0.0.0 --env=dev
+

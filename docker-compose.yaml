@@ -33,7 +33,7 @@ services:
       dockerfile: Dockerfile.catanie
     image: garethcmurphy/catanie
     ports:
-      - '4200:80'
+      - '4200:4200'
     depends_on: 
       - local-rabbit-rabbitmq.dev
       - local-mongodb-mongodb.dev
@@ -44,7 +44,7 @@ services:
       dockerfile: Dockerfile.catamel
     image: garethcmurphy/catamel
     ports:
-      - '3001:3000'
+      - '3000:3000'
     depends_on: 
       - local-mongodb-mongodb.dev
       - local-rabbit-rabbitmq.dev
