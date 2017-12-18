@@ -19,5 +19,5 @@ EXPOSE 4200
 
 # Start the app
 #CMD HOST=`hostname -i` npm start
-CMD ./node_modules/@angular/cli/bin ng serve --host 0.0.0.0 --env=dev
+CMD ./node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --env=dev
 

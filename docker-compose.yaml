@@ -27,16 +27,16 @@ services:
     depends_on: 
       - local-mongodb-mongodb.dev
 
-  catanie:
-    build: 
-      context: catanie
-      dockerfile: Dockerfile.catanie
-    image: garethcmurphy/catanie
-    ports:
-      - '4200:4200'
-    depends_on: 
-      - local-rabbit-rabbitmq.dev
-      - local-mongodb-mongodb.dev
+#  catanie:
+#    build: 
+#      context: catanie
+#      dockerfile: Dockerfile.catanie
+#    image: garethcmurphy/catanie
+#    ports:
+#      - '4200:4200'
+#    depends_on: 
+#      - local-rabbit-rabbitmq.dev
+#      - local-mongodb-mongodb.dev
 
   catamel:
     build: 
@@ -48,7 +48,6 @@ services:
     depends_on: 
       - local-mongodb-mongodb.dev
       - local-rabbit-rabbitmq.dev
-      - catanie
       - myshell
     links:
       - local-mongodb-mongodb.dev
