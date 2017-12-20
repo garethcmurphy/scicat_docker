@@ -1,61 +1,62 @@
+
 [
     {
-        "id": "ada63ab9.b0cbf8",
+        "id": "d7f6f48c.252f98",
         "type": "kafka in",
-        "z": "ac4d6a53.be8fe8",
+        "z": "54103b3f.bc3244",
         "zkquorum": "zookeeper:2181",
         "topics": "test",
         "groupId": "null",
         "debug": "",
         "autoCommit": true,
-        "x": 293.5,
-        "y": 403,
+        "x": 224.52430725097656,
+        "y": 255.65277862548828,
         "wires": [
             [
-                "5b459281.8a263c"
+                "d5564b63.3ac718"
             ]
         ]
     },
     {
-        "id": "5b459281.8a263c",
+        "id": "d5564b63.3ac718",
         "type": "debug",
-        "z": "ac4d6a53.be8fe8",
+        "z": "54103b3f.bc3244",
         "name": "",
         "active": true,
         "console": "false",
         "complete": "false",
-        "x": 691.5,
-        "y": 390,
+        "x": 643.5174102783203,
+        "y": 237.56250762939453,
         "wires": []
     },
     {
-        "id": "c030418b.40376",
-        "type": "kafka",
-        "z": "ac4d6a53.be8fe8",
-        "zkquorum": "zookeeper:2181",
-        "topics": "test",
-        "debug": "",
-        "x": 783.5,
-        "y": 109,
-        "wires": []
-    },
-    {
-        "id": "57f599cb.396de8",
+        "id": "dbc7caa7.140e38",
         "type": "inject",
-        "z": "ac4d6a53.be8fe8",
+        "z": "54103b3f.bc3244",
         "name": "",
         "topic": "",
-        "payload": "odin",
-        "payloadType": "str",
+        "payload": "",
+        "payloadType": "date",
         "repeat": "",
         "crontab": "",
         "once": false,
-        "x": 350,
-        "y": 140,
+        "x": 340,
+        "y": 440,
         "wires": [
             [
-                "c030418b.40376"
+                "6ea81caa.3170a4"
             ]
         ]
+    },
+    {
+        "id": "6ea81caa.3170a4",
+        "type": "kafka",
+        "z": "54103b3f.bc3244",
+        "zkquorum": "zookeeper:2181",
+        "topics": "test",
+        "debug": "",
+        "x": 596.5208282470703,
+        "y": 425.3229446411133,
+        "wires": []
     }
 ]
