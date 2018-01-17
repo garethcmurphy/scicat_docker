@@ -1,6 +1,6 @@
 # gives a docker image below 200 MB
 FROM ubuntu:artful
-RUN apt-get update && apt-get install -y git gnupg curl iputils-ping
+RUN apt-get update && apt-get install -y git gnupg curl iputils-ping make vim rabbitmq-server
 RUN curl -sL https://deb.nodesource.com/setup_9.x |  bash -
 RUN apt-get install -y nodejs
 
@@ -16,7 +16,7 @@ COPY package.json /usr/src/app/
 
 USER myuser
 # Install our packages
-RUN npm install --production
+RUN npm install 
 
 #  patch for loopback-component-passport
 RUN sed -i "s|relations: modelDefinition.relations,|relations: modelDefinition.relations,acls: modelDefinition.acls|" node_modules/loopback-component-passport/lib/index.js
@@ -27,4 +27,4 @@ COPY . /usr/src/app
 
 # Start the app
 USER root
-CMD ["./waitnode.sh", "."]
+CMD ["./start.sh"]
